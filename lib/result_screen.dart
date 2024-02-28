@@ -18,9 +18,7 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  // final openAI = OpenAI.instance.build(
-  //     token: "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",
-  //     baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 5)),enableLog: true);
+
   final apiKey = 'AIzaSyDZxuXqjDiMk9H4QwPrNoZ-7F_xwD87oUI';
 
   // State variables
@@ -33,31 +31,7 @@ class _ResultScreenState extends State<ResultScreen> {
   String alternativeFood = 'N/A';
   bool _loading = false;
 
-  // // this function doesn't work
-  // void uploadFile(filePath) async {
-  //   final request = UploadFile(file: FileInfo('/data/user/0/org.glassplate.app.glass_plate/cache/', 'image_data.jsonl'), purpose: 'fine-tune');
-  //   final response = await openAI.file.uploadFile(request).then((value) {
-  //     print("File uploaded successfully");
-  //     chatComplete();
-  //   }).catchError((error) {
-  //     print(error);
-  //   });
-  //   print(response);
-  // }
-
-  // this function works
-  // void chatComplete() async {
-  //   final request = ChatCompleteText(messages: [
-  //     Map.of({"role": "user", "content": 'Please describe what the uploaded image is.'})
-  //   ], maxToken: 200, model: Gpt4ChatModel());
-  //
-  //   final response = await openAI.onChatCompletion(request: request);
-  //   for (var element in response!.choices) {
-  //     print("data -> ${element.message?.content}");
-  //   }
-  // }
-
-// Assuming this function is inside a class
+  // Assuming this function is inside a class
   void getFoodInfo() async {
     setState(() {
       _loading = true;
@@ -118,13 +92,13 @@ class _ResultScreenState extends State<ResultScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: <Widget>[
-                        _buildInfoRow('Food Name', foodName),
-                        _buildInfoRow('Portion', portion),
-                        _buildInfoRow('CO2 Emissions', co2Emissions),
-                        _buildInfoRow('Scarce Water', scarceWater),
-                        _buildInfoRow('Season Rating', seasonRating),
-                        _buildInfoRow('Overall Rating', overallRating),
-                        _buildInfoRow('Alternative Food', alternativeFood),
+                        _buildInfoRow('Food', foodName, Colors.black45),
+                        _buildInfoRow('Amount', portion, Colors.black45),
+                        _buildInfoRow('CO2 Emissions', co2Emissions, Colors.grey),
+                        _buildInfoRow('Scarce Water', scarceWater, Colors.blue),
+                        _buildInfoRow('Season Rating', seasonRating, Colors.lightGreen),
+                        _buildInfoRow('Overall Rating', overallRating, Colors.pink),
+                        _buildInfoRow('Alternative Food', alternativeFood, Colors.green),
                         ElevatedButton(
                             onPressed: () {
                               getFoodInfo();
@@ -139,12 +113,41 @@ class _ResultScreenState extends State<ResultScreen> {
     );
   }
 
-  Widget _buildInfoRow(String fieldName, String value) {
+  Widget _buildInfoRow(String fieldName, String value, var valueColor) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(fieldName, style: TextStyle(fontWeight: FontWeight.bold)),
-        Text(value),
+        Expanded(
+          flex: 60,
+          child: Container(
+            margin: EdgeInsets.all(5),
+            alignment: Alignment.center, // Centers the Text widget inside the Container
+            padding: EdgeInsets.all(8), // Adjust padding as needed
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: valueColor, // Color of the border
+                width: 2, // Width of the border
+              ),
+              borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
+            ),
+            child: Text('$fieldName', style: TextStyle(fontSize: 20)),
+          ),
+        ),
+        Expanded(
+          flex: 40,
+          child: Container(
+            margin: EdgeInsets.all(5),
+            alignment: Alignment.center, // Centers the Text widget inside the Container
+            padding: EdgeInsets.all(8), // Adjust padding as needed
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: valueColor, // Color of the border
+                width: 2, // Width of the border
+              ),
+              borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
+            ),
+            child: Text('$value', style: TextStyle(fontSize: 20)),
+          ),
+        ),
       ],
     );
   }
