@@ -28,70 +28,8 @@ class _ResultScreenState extends State<ResultScreen> {
   String overallRating = 'N/A';
   String alternativeFood = 'N/A';
 
-  @override
-  void initState() {
-    super.initState();
-    if (widget.imagePath != null) {
-      encodeImageToJsonlFile(widget.imagePath!);
-    }
-  }
-
-  Future<void> encodeImageToJsonlFile(String imagePath) async {
-    try {
-      String base64Image = await encodeImageToBase64(imagePath);
-      String jsonlFilePath = await createJsonlFile(base64Image);
-      // Use jsonlFilePath as needed, for example, to upload to an API
-      print("Encoded successfully!");
-      print(jsonlFilePath);
-    } catch (e) {
-      // Handle exceptions
-      print('Error encoding image: $e');
-    }
-  }
-
-  Future<String> encodeImageToBase64(String imagePath) async {
-    File file = File(imagePath);
-    List<int> imageBytes = await file.readAsBytes();
-    return base64Encode(imageBytes);
-  }
-
-  Future<String> createJsonlFile(String base64Image) async {
-    Directory tempDir = await getTemporaryDirectory();
-    String jsonlFilePath = '${tempDir.path}/image_data.jsonl';
-    File jsonlFile = File(jsonlFilePath);
-    String jsonLine = jsonEncode({"image": base64Image});
-    await jsonlFile.writeAsString('$jsonLine\n');
-    return jsonlFilePath;
-  }
-
-  // Future<String> encodeImageToBase64(String imagePath) async {
-  //   File file = File(imagePath);
-  //   List<int> imageBytes = await file.readAsBytes();
-  //   return base64Encode(imageBytes);
-  // }
-  //
-  // Future<String> createJsonlFile(String base64Image, String jsonlFilePath) async {
-  //   final Directory extDir = await getApplicationDocumentsDirectory();
-  //   final String dirPath = '${extDir.path}/Pictures/flutter_test';
-  //   await Directory(dirPath).create(recursive: true);
-  //
-  //   // Create a unique file name with the current timestamp
-  //   final String filePath = '$dirPath/${DateTime.now().millisecondsSinceEpoch}.jsonl';
-  //
-  //   File jsonlFile = File(filePath);
-  //   String jsonLine = jsonEncode({"image": base64Image});
-  //   await jsonlFile.writeAsString('$jsonLine\n', mode: FileMode.append);
-  //   return jsonlFile.path;
-  // }
-
+  // this function doesn't work
   void uploadFile(filePath) async {
-    // var base64Image = await encodeImageToBase64(widget.imagePath!);
-    // var jsonlFilePath = await createJsonlFile(base64Image, 'image.jsonl');
-    // print(jsonlFilePath);
-
-    // print(widget.imagePath!);
-    // print(widget.imagePath.toString());
-
     final request = UploadFile(file: FileInfo('/data/user/0/org.glassplate.app.glass_plate/cache/', 'image_data.jsonl'), purpose: 'fine-tune');
     final response = await openAI.file.uploadFile(request).then((value) {
       print("File uploaded successfully");
@@ -102,6 +40,7 @@ class _ResultScreenState extends State<ResultScreen> {
     print(response);
   }
 
+  // this function works
   void chatComplete() async {
     final request = ChatCompleteText(messages: [
       Map.of({"role": "user", "content": 'Please describe what the uploaded image is.'})
