@@ -1,5 +1,6 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:glass_plate/home_screen.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
@@ -30,6 +31,13 @@ class _ResultScreenState extends State<ResultScreen> {
   String overallRating = 'N/A';
   String alternativeFood = 'N/A';
   bool _loading = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getFoodInfo();
+  }
 
   // Assuming this function is inside a class
   void getFoodInfo() async {
@@ -92,18 +100,25 @@ class _ResultScreenState extends State<ResultScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: <Widget>[
-                        _buildInfoRow('Food', foodName, Colors.black45),
-                        _buildInfoRow('Amount', portion, Colors.black45),
-                        _buildInfoRow('CO2 Emissions', co2Emissions, Colors.grey),
-                        _buildInfoRow('Scarce Water', scarceWater, Colors.blue),
-                        _buildInfoRow('Season Rating', seasonRating, Colors.lightGreen),
-                        _buildInfoRow('Overall Rating', overallRating, Colors.pink),
-                        _buildInfoRow('Alternative Food', alternativeFood, Colors.green),
+                        Column(
+                          children: [
+                            _buildInfoRow('Food', foodName, Colors.black45),
+                            _buildInfoRow('Amount', portion, Colors.black45),
+                            _buildInfoRow('CO2 Emissions', co2Emissions, Colors.grey),
+                            _buildInfoRow('Scarce Water', scarceWater, Colors.blue),
+                            _buildInfoRow('Season Rating', seasonRating, Colors.lightGreen),
+                            _buildInfoRow('Overall Rating', overallRating, Colors.pink),
+                            _buildInfoRow('Alternative Food', alternativeFood, Colors.green),
+                          ],
+                        ),
                         ElevatedButton(
                             onPressed: () {
-                              getFoodInfo();
+                              //getFoodInfo();
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) => HomeScreen()),
+                              );
                             },
-                            child: Text('Test'))
+                            child: Text('Okey'))
                       ],
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'dart:math';
 
 import 'camera_screen.dart';
 
@@ -15,6 +16,21 @@ class _HomeScreenState extends State<HomeScreen> {
   String percentageSaved = '25%';
   String beatingUSAverage = '75%';
   String foodRating = '7/10';
+
+  @override
+  void initState() {
+    super.initState();
+    var rng = Random();
+
+    co2Saved = '${rng.nextInt(500)}g'; // Random value between 0g to 499g
+    waterSaved = '${rng.nextInt(1000)}L'; // Random value between 0L to 999L
+    percentageSaved = '${rng.nextInt(100)}%'; // Random value between 0% to 99%
+    beatingUSAverage = '${rng.nextInt(100)}%'; // Random value between 0% to 99%
+    foodRating = '${rng.nextInt(10) + 1}/10'; // Random value between 1/10 to 10/10
+    setState(() {
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -193,6 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   iconSize: 100.0,
                   icon: Icon(Icons.camera_alt),
                   onPressed: () {
+                    print("Test");
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => CameraScreen()),
                     );
