@@ -118,7 +118,7 @@ class _ResultScreenState extends State<ResultScreen> {
                                 MaterialPageRoute(builder: (context) => HomeScreen()),
                               );
                             },
-                            child: Text('Okey'))
+                            child: Text('Okay'))
                       ],
                     ),
                   ),

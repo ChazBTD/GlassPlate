@@ -22,11 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     var rng = Random();
 
-    co2Saved = '${rng.nextInt(500)}g'; // Random value between 0g to 499g
-    waterSaved = '${rng.nextInt(1000)}L'; // Random value between 0L to 999L
-    percentageSaved = '${rng.nextInt(100)}%'; // Random value between 0% to 99%
-    beatingUSAverage = '${rng.nextInt(100)}%'; // Random value between 0% to 99%
-    foodRating = '${rng.nextInt(10) + 1}/10'; // Random value between 1/10 to 10/10
+    co2Saved = '1842 grams'; // Random value between 0g to 499g
+    waterSaved = '791 L'; // Random value between 0L to 999L
+    percentageSaved = '32%'; // Random value between 0% to 99%
+    beatingUSAverage = '47%!'; // Random value between 0% to 99%
+    foodRating = '8/10'; // Random value between 1/10 to 10/10
     setState(() {
 
     });
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Today, You Saved'),
+        title: Text('Hey Camus! Today You Used'),
         centerTitle: true,
       ),
       body: Column(
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
                       ),
-                      child: Text('$co2Saved CO2 saved', style: TextStyle(fontSize: 28)),
+                      child: Text('$co2Saved in CO2', style: TextStyle(fontSize: 28)),
                     ),
                   ),
                   Expanded(
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
                       ),
-                      child: Text('$waterSaved of scarce water', style: TextStyle(fontSize: 28)),
+                      child: Text('$waterSaved in scarce Water', style: TextStyle(fontSize: 28)),
                     ),
                   ),
                   Expanded(
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
                             ),
-                            child: Text('less than last week', style: TextStyle(fontSize: 20)),
+                            child: Text('Less than last Week', style: TextStyle(fontSize: 18)),
                           ),
                         ),
                       ],
@@ -136,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
                             ),
-                            child: Text('Beating the average US resident by $beatingUSAverage', style: TextStyle(fontSize: 20)),
+                            child: Text('Beating the Average US Resident By', style: TextStyle(fontSize: 20)),
                           ),
                         ),
                         Expanded(
@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
                             ),
-                            child: Text('Because you choose food rated at', style: TextStyle(fontSize: 20)),
+                            child: Text('Because you choose your plates rated at ≈', style: TextStyle(fontSize: 20)),
                           ),
                         ),
                         Expanded(
